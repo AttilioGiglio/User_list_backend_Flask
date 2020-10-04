@@ -7,10 +7,15 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database/users.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
+class Users(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    name = db.Column(db.String(50), nullable=False)
+    email = db.Column(db.String(50), nullable=False, unique=True)
+    password = db.Column(db.String(50), nullable=False)
 
-@app.route('/users', methods=['POST'])
-def createuser():
-    return "sucess"
+@app.route('/', methods=['POST'])
+def index():
+    return "<h1>HELLO WORLD</h1>"
 
 @app.route('/users', methods=['GET'])
 def getusers():
